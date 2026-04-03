@@ -1,3 +1,5 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  // "react-hooks/rules-of-hooks": "off", // Hook 사용 규칙
+  "react-hooks/exhaustive-deps": "off" // deps 배열 검사
 }

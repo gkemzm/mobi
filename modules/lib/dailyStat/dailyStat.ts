@@ -1,14 +1,11 @@
-import {
-  DailyStatResponse,
-  DailyStatSummary,
-  GetDailyStatsParams,
-} from "@/types/marketing";
+import { DailyStatResponse, GetDailyStatsParams } from "@/types/marketing";
+import { DailyStatAtomType } from "../../atom/dailyStat/atom";
 
 export async function getDailyStats({
   campaignId,
   startDate,
   endDate,
-}: GetDailyStatsParams): Promise<DailyStatSummary[]> {
+}: GetDailyStatsParams): Promise<DailyStatAtomType> {
   const params = new URLSearchParams({
     campaignId,
     startDate,
@@ -20,7 +17,7 @@ export async function getDailyStats({
     {
       method: "GET",
       cache: "no-store",
-    },
+    }
   );
 
   if (!response.ok) {
@@ -28,5 +25,5 @@ export async function getDailyStats({
   }
 
   const result: DailyStatResponse = await response.json();
-  return result.data;
+  return { name: result.name, data: result.data };
 }

@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  width: 200px;
+  height: 80vh; // 🔥 핵심: 화면 높이 고정
+  overflow: hidden; // 🔥 핵심: 전체 스크롤 막기
+  background: #f8f9fb;
+}
+
+.sidebar {
+  width: 100%;
+  border-right: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 12px 8px;
+  overflow-y: auto;
+}
+
+.searchArea {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  font-size: 12px;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: #9ca3af;
+  }
+}
+
+.searchButton {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #f9fafb;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover {
+    background: #95b3f0;
+    color: #222222;
+    font-weight: 600;
+  }
+}
+
+.campaignList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.campaignItem {
+  width: 100%;
+}
+
+.campaignLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.checkbox {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.name {
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #222222;
+  word-break: break-all;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content {
+  flex: 1;
+  background: #f8f9fb;
+
+  overflow-y: auto; // ✅ 우측 영역도 내부 스크롤
+}

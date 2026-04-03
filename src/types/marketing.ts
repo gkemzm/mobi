@@ -34,9 +34,11 @@ export interface DailyStatSummary {
   ctr: number;
   cpc: number;
   roas: number;
+  campaignData?: Campaign;
 }
 
 export interface DailyStatResponse {
+  name: string;
   success: boolean;
   campaignId: string;
   startDate: string;

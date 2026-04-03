@@ -4,7 +4,6 @@ import { DailyStatResponse, DailyStatSummary } from "@/types/marketing";
 import { useEffect, useState } from "react";
 
 export default function DailyStatViewer({ data }: any) {
-  console.log(data, "data");
   const [stats, setStats] = useState<DailyStatSummary[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +35,7 @@ export default function DailyStatViewer({ data }: any) {
       setError(
         error instanceof Error
           ? error.message
-          : "알 수 없는 에러가 발생했습니다.",
+          : "알 수 없는 에러가 발생했습니다."
       );
     } finally {
       setLoading(false);
@@ -52,7 +51,7 @@ export default function DailyStatViewer({ data }: any) {
 
   return (
     <div>
-      <h2>일별 성과</h2>
+      <h2 className="border-red-500">일별 성과</h2>
 
       {stats.length === 0 ? (
         <div>데이터가 없습니다.</div>

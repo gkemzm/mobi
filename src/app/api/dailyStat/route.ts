@@ -62,9 +62,13 @@ export async function GET(request: NextRequest) {
     if (!campaignId) {
       return NextResponse.json(
         { message: "campaignId는 필수입니다." },
-        { status: 400 },
+        { status: 400 }
       );
     }
+
+    let { campaigns } = data as MarketingData;
+
+    const campaignData = campaigns.filter((c) => c.id === campaignId);
 
     if (!startDate || !endDate) {
       return NextResponse.json(
@@ -72,14 +76,14 @@ export async function GET(request: NextRequest) {
           message:
             "startDate와 endDate는 유효한 날짜 형식이어야 합니다. (YYYY-MM-DD)",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     if (startDate > endDate) {
       return NextResponse.json(
         { message: "startDate는 endDate보다 클 수 없습니다." },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -129,6 +133,7 @@ export async function GET(request: NextRequest) {
     const result: DailyStatSummary[] = Object.values(groupedByDate)
       .map((item) => ({
         ...item,
+        campaignData: campaignData[0],
         ctr: calculateCTR(item.clicks, item.impressions),
         cpc: calculateCPC(item.cost, item.clicks),
         roas: calculateROAS(item.conversionsValue, item.cost),
@@ -137,20 +142,21 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       {
+        name: campaignData[0].name,
         success: true,
         campaignId,
         startDate,
         endDate,
         data: result,
       },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
     console.error("[GET /api/dailyStat] error:", error);
 
     return NextResponse.json(
       { message: "일간 성과 데이터를 불러오지 못했습니다." },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

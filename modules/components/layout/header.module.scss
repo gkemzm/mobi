@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 왼쪽 영역 */
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 24px;
+}
+
+.header p {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #6b7280;
+}
