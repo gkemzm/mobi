@@ -1,5 +1,5 @@
-import { DailyStatResponse, GetDailyStatsParams } from "@/types/marketing";
-import { DailyStatAtomType } from "../../atom/dailyStat/atom";
+import { DailyStatResponse, GetDailyStatsParams } from "@/types/dailyStat";
+import { DailyStatAtomType } from "./atom/atom";
 
 export async function getDailyStats({
   campaignId,

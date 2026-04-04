@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import data from "@/data/db.json";
-import type {
-  DailyStat,
-  DailyStatSummary,
-  MarketingData,
-} from "@/types/marketing";
+import type { MarketingData } from "@/types/marketing";
+import { DailyStat, DailyStatSummary } from "@/types/dailyStat";
 
 function normalizeNumber(value: number | string | null | undefined): number {
   if (value === null || value === undefined) return 0;

@@ -5,7 +5,7 @@ import { ParamsType } from "@/types/common";
 import { useRouter } from "next/navigation";
 import { getDailyStats } from "../../../../lib/dailyStat/dailyStat";
 import { useSetAtom } from "jotai";
-import { dailyStatAtom } from "../../../../atom/dailyStat/atom";
+import { dailyStatAtom } from "../../../../lib/dailyStat/atom/atom";
 
 interface CampaignListType {
   campaignList: Campaign[];

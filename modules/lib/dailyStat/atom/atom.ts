@@ -1,4 +1,4 @@
-import { DailyStatSummary } from "@/types/marketing";
+import { DailyStatSummary } from "@/types/dailyStat";
 import { atom } from "jotai";
 export interface DailyStatAtomType {
   name: string;

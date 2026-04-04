@@ -4,21 +4,13 @@ import dynamic from "next/dynamic";
 import Highcharts from "highcharts";
 import { useMemo, useState } from "react";
 import classes from "./lineChart.module.scss";
-import { DailyStatSummary } from "@/types/marketing";
+import { DailyStatSummary } from "@/types/dailyStat";
 
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
   ssr: false,
 });
 
-type MetricKey =
-  | "impressions"
-  | "clicks"
-  | "conversions"
-  | "cost"
-  | "conversionsValue"
-  | "ctr"
-  | "cpc"
-  | "roas";
+type MetricKey = "impressions" | "clicks";
 
 type MetricConfig = {
   key: MetricKey;
@@ -50,14 +42,6 @@ const formatDateLabel = (date: string) => {
 };
 
 const formatMetricValue = (metric: MetricKey, value: number) => {
-  if (metric === "ctr" || metric === "roas") {
-    return `${NUMBER_FORMATTER.format(value)}%`;
-  }
-
-  if (metric === "cost" || metric === "conversionsValue" || metric === "cpc") {
-    return `${NUMBER_FORMATTER.format(value)}원`;
-  }
-
   return NUMBER_FORMATTER.format(value);
 };
 

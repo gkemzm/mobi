@@ -1,6 +1,6 @@
 "use client";
 
-import { DailyStatResponse, DailyStatSummary } from "@/types/marketing";
+import { DailyStatResponse, DailyStatSummary } from "@/types/dailyStat";
 import { useEffect, useState } from "react";
 
 export default function DailyStatViewer({ data }: any) {

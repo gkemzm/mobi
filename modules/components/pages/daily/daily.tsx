@@ -3,15 +3,16 @@
 import { ParamsType } from "@/types/common";
 import { Campaign } from "@/types/marketing";
 import { useHydrateAtoms } from "jotai/utils";
-import { campaignsAtom } from "../../../atom/campaign/atom";
 import { useAtom, useAtomValue } from "jotai";
 import { useEffect } from "react";
 import { getCampaigns } from "../../../lib/campaign/campaign";
-import useQueryString from "../../../hooks/useQuerySting";
+
 import CampaignList from "./campaignList/campaignList";
 import LineChart from "./lineChart/lineChart";
 import classes from "./daily.module.scss";
-import { dailyStatAtom } from "../../../atom/dailyStat/atom";
+import useQueryString from "@/hooks/useQuerySting";
+import { campaignsAtom } from "../../../lib/campaign/atom/atom";
+import { dailyStatAtom } from "../../../lib/dailyStat/atom/atom";
 
 interface DailyCompoentType {
   params: ParamsType;
