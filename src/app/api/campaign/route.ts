@@ -8,32 +8,39 @@ export const GET = async (req: Request) => {
 
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
-    const status = searchParams.get("status");
-    const platform = searchParams.get("platform");
-    const name = searchParams.get("name");
+    const statuses = searchParams.getAll("status");
+    const platforms = searchParams.getAll("platform");
+    const name = searchParams.get("name")?.trim().toLowerCase();
 
     let { campaigns } = data as MarketingData;
 
-    // 1. name null 제거
     campaigns = campaigns.filter((c) => c.name !== null);
 
-    // 2. 필터 적용
     const filtered = campaigns.filter((c) => {
-      // 시작일 필터 (이후 데이터)
-      if (startDate && c.startDate < startDate) return false;
+      // 1. 집행 기간 겹침 여부
+      if (startDate && endDate) {
+        const campaignStart = c.startDate;
+        const campaignEnd = c.endDate ?? "9999-12-31";
 
-      // 종료일 필터 (이전 데이터)
-      if (endDate && c.endDate && c.endDate > endDate) return false;
+        if (campaignStart > endDate || campaignEnd < startDate) {
+          return false;
+        }
+      }
 
-      // 상태 필터
-      if (status && c.status !== status) return false;
-
-      // 매체 필터
-      if (platform && c.platform !== platform) return false;
-
-      // 이름 필터 (부분 검색)
-      if (name && !c.name.toLowerCase().includes(name.toLowerCase()))
+      // 2. 상태 필터 (다중 선택)
+      if (statuses.length > 0 && !statuses.includes(c.status)) {
         return false;
+      }
+
+      // 3. 매체 필터 (다중 선택)
+      if (platforms.length > 0 && !platforms.includes(c.platform)) {
+        return false;
+      }
+
+      // 4. 이름 검색
+      if (name && !c.name.toLowerCase().includes(name)) {
+        return false;
+      }
 
       return true;
     });

@@ -13,6 +13,7 @@ import classes from "./daily.module.scss";
 import useQueryString from "@/hooks/useQuerySting";
 import { campaignsAtom } from "../../../lib/campaign/atom/atom";
 import { dailyStatAtom } from "../../../lib/dailyStat/atom/atom";
+import useCampaignData from "@/hooks/useCampaignData";
 
 interface DailyCompoentType {
   params: ParamsType;
@@ -23,23 +24,21 @@ interface DailyCompoentType {
 const DailyComponent = ({ params, datas }: DailyCompoentType) => {
   useHydrateAtoms([[campaignsAtom, datas.campaigns]]);
   /* ATOM */
-  const [campaigns, setCampaigns] = useAtom(campaignsAtom);
+  const campaigns = useAtomValue(campaignsAtom);
   const dailyStat = useAtomValue(dailyStatAtom);
   /* ATOM[E] */
+  const [getCampaignData] = useCampaignData();
 
   useEffect(() => {
-    async function getCampaignData() {
-      try {
-        const [queryString] = useQueryString(params);
-        const items = await getCampaigns(queryString.toString());
-
-        setCampaigns(items);
-      } catch (err) {
-        console.error("getCampaignData");
-      }
+    const name = sessionStorage.getItem("dailyKeyword");
+    if (typeof name === "string") {
+      getCampaignData({
+        ...params,
+        searchParams: { ...params.searchParams, name: name },
+      });
+    } else {
+      getCampaignData(params);
     }
-
-    getCampaignData();
   }, [params]);
 
   return (

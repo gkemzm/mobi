@@ -5,6 +5,7 @@
   padding: 12px 24px;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
+  gap: 20px;
 }
 
 /* 왼쪽 영역 */
@@ -19,4 +20,8 @@
   margin-top: 4px;
   font-size: 13px;
   color: #6b7280;
+}
+
+.filterArea {
+  display: flex;
 }

@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import classes from "./header.module.scss";
 import { layoutList } from "@/data/layout";
+import GlobalFilter from "../common/globalFilter/globalFilter";
 
 const Header = () => {
   const pathName = usePathname();
@@ -14,7 +15,15 @@ const Header = () => {
               ?.name
           }
         </h1>
-        <p>통계 데이터를 확인하세요</p>
+        <p>
+          {
+            layoutList.find((item) => `/dashboard/${item.id}` === pathName)
+              ?.description
+          }
+        </p>
+      </div>
+      <div className={classes.filterArea}>
+        <GlobalFilter />
       </div>
     </header>
   );
