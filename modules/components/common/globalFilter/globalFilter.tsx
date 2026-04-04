@@ -43,6 +43,8 @@ const GlobalFilter = ({ value, onChange }: GlobalFilterProps) => {
     }
 
     onChange?.(nextFilter);
+
+    sessionStorage.setItem("globalFilterValue", JSON.stringify(nextFilter));
   };
 
   const handleRangeChange = (range: DateRange | undefined) => {
@@ -94,6 +96,28 @@ const GlobalFilter = ({ value, onChange }: GlobalFilterProps) => {
     const tranQueryData = transFilterQuery(filter);
     router.push(`?${tranQueryData}`);
   }, [filter]);
+
+  useEffect(() => {
+    const prevFilter = sessionStorage.getItem("globalFilterValue");
+    if (prevFilter && typeof prevFilter === "string") {
+      try {
+        const parseData = JSON.parse(prevFilter);
+
+        updateFilter(parseData);
+      } catch (err) {
+        console.error("filter parseError");
+      }
+    }
+
+    if (!prevFilter) {
+      const newObj = {
+        period: initialValue.period,
+        statuses: initialValue.statuses,
+        platforms: initialValue.platforms,
+      };
+      sessionStorage.setItem("globalFilterValue", JSON.stringify(newObj));
+    }
+  }, []);
 
   return (
     <div className={classes.filter} ref={filterRef}>

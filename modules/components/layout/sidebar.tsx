@@ -9,7 +9,24 @@ const Sidebar = () => {
   const pathName = usePathname();
 
   const onClickList = (item: LayoutItem) => {
-    router.push(`/dashboard/${item.id}`);
+    const globalValue = sessionStorage.getItem("globalFilterValue");
+    if (globalValue && typeof globalValue === "string") {
+      try {
+        const parseData = JSON.parse(globalValue);
+        const newObj = {
+          startDate: parseData.period.from,
+          endDate: parseData.period.to,
+          statuses: parseData.statuses,
+          platforms: parseData.platforms,
+        };
+        const url = new URLSearchParams(newObj);
+        router.push(`/dashboard/${item.id}?${url.toString()}`);
+      } catch (err) {
+        console.error("filter parseError");
+      }
+    } else {
+      router.push(`/dashboard/${item.id}`);
+    }
   };
 
   return (

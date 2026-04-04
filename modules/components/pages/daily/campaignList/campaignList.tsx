@@ -58,7 +58,6 @@ const CampaignList = ({ campaignList, params }: CampaignListType) => {
       sessionStorage.setItem("dailyCheck", JSON.stringify([...checked, id]));
     }
   };
-  console.log(selected, "selected");
   useEffect(() => {
     // 검색값 유지
     const word = sessionStorage.getItem("dailyKeyword");
