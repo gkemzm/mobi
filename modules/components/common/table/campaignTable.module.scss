@@ -1,4 +1,5 @@
 .container {
+  width: 100%;
   padding: 12px 24px;
   border: 1px solid #e9edf3;
   border-radius: 20px;
@@ -11,6 +12,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
+  gap: 12px;
 }
 
 .title {
@@ -18,6 +20,7 @@
   font-size: 24px;
   font-weight: 700;
   color: #2f3441;
+  white-space: nowrap;
 }
 
 .createButton {
@@ -124,6 +127,7 @@
 .count {
   font-size: 14px;
   color: #98a2b3;
+  white-space: nowrap;
 }
 
 .tableWrap {
@@ -253,4 +257,66 @@
   background: #eaf3ff;
   color: #3b82f6;
   font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 8px;
+    overflow-x: hidden;
+    max-width: 96vw;
+    min-width: 340px;
+  }
+
+  .header {
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 12px;
+  }
+
+  .createButton {
+    width: 100%;
+    justify-content: center;
+    font-size: 12px;
+    .plus {
+      position: relative;
+      top: 2px;
+      font-size: 12px;
+    }
+  }
+  .searchArea {
+    margin-bottom: 0px;
+  }
+  .searchInput {
+    height: 32px;
+  }
+  .select {
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bulkActionBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .select,
+  .applyButton {
+    width: 100%;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
 }

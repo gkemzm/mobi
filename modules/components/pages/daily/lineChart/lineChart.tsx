@@ -79,9 +79,9 @@ const CampaignDailyTrendChart = ({
         height: chartHeight,
         backgroundColor: "#ffffff",
         spacingTop: 0,
-        spacingRight: 24,
+        spacingRight: 0,
         spacingBottom: 16,
-        spacingLeft: 24,
+        spacingLeft: 0,
       },
       title: {
         text: undefined,

@@ -13,4 +13,8 @@
 .content {
   padding: 24px;
   flex: 1;
+
+  @media screen and (max-width: 1024px) {
+    padding: 12px;
+  }
 }

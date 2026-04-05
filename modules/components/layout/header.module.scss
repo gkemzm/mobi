@@ -6,6 +6,22 @@
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   gap: 20px;
+
+  @media screen and (max-width: 1024px) {
+    gap: 8px;
+    padding: 4px 0px;
+    padding: 0px 12px;
+  }
+}
+
+.textArea {
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between;
+  }
 }
 
 /* 왼쪽 영역 */
@@ -14,14 +30,79 @@
   font-weight: 700;
   color: #111827;
   line-height: 24px;
+  white-space: nowrap;
+  @media screen and (max-width: 1024px) {
+    font-size: 16px;
+  }
 }
 
 .header p {
   margin-top: 4px;
   font-size: 13px;
   color: #6b7280;
+  @media screen and (max-width: 1024px) {
+    margin-top: 8px;
+    font-size: 12px;
+  }
 }
 
 .filterArea {
   display: flex;
+
+  .filterToggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    cursor: pointer;
+    white-space: nowrap;
+    @media (max-width: 1024px) {
+      display: inline-flex;
+    }
+  }
+
+  .panel {
+    display: block;
+
+    @media (max-width: 1024px) {
+      position: absolute;
+      top: 48px;
+      right: 0;
+      z-index: 100;
+      width: min(100vw - 32px, 720px);
+      display: none;
+    }
+  }
+
+  .open {
+    @media (max-width: 1024px) {
+      display: block;
+    }
+  }
+
+  .menuButton {
+    display: none;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0px 4px;
+
+    @media (max-width: 1024px) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }

@@ -3,10 +3,16 @@ import { layoutList } from "@/data/layout";
 import classes from "./sidebar.module.scss";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutItem } from "@/types/layout";
+import { useAtom } from "jotai";
+import { isSidebarOpenAtom } from "../../lib/layout/atom/atom";
+import { useEffect } from "react";
 
 const Sidebar = () => {
   const router = useRouter();
   const pathName = usePathname();
+  /* ATOM */
+  const [isSidebarOpen, setIsSidebarOpen] = useAtom(isSidebarOpenAtom);
+  /* ATOM[E] */
 
   const onClickList = (item: LayoutItem) => {
     const globalValue = sessionStorage.getItem("globalFilterValue");
@@ -33,18 +39,45 @@ const Sidebar = () => {
 
     sessionStorage.removeItem("dailyCheck");
     sessionStorage.removeItem("dailyKeyword");
+
+    setIsSidebarOpen(false);
   };
 
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, []);
+
   return (
-    <aside className={classes.sidebar}>
-      <div className={classes.logo}>LOGO</div>
+    <aside
+      className={`${classes.sidebar} ${isSidebarOpen ? classes.open : ""}`}
+    >
+      <div className={classes.top}>
+        <div className={classes.logo}>LOGO</div>
+
+        <button
+          type="button"
+          className={classes.closeButton}
+          onClick={() => setIsSidebarOpen(false)}
+          aria-label="사이드바 닫기"
+        >
+          ✕
+        </button>
+      </div>
 
       <nav className={classes.nav}>
         {layoutList.map((item) => {
           return (
             <button
+              type="button"
               className={`${classes.item} ${
-                pathName === `/dashboard/${item.id}` && classes.active
+                pathName === `/dashboard/${item.id}` ? classes.active : ""
               }`}
               key={item.id}
               onClick={() => onClickList(item)}

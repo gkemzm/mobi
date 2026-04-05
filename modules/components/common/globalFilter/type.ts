@@ -3,6 +3,7 @@ import { CampaignPlatform, CampaignStatus } from "@/types/marketing";
 export interface GlobalFilterProps {
   value?: GlobalFilterState;
   onChange?: (nextFilter: GlobalFilterState) => void;
+  onClose: () => void;
 }
 
 export interface DateRangeValue {

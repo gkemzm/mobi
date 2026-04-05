@@ -1,8 +1,10 @@
 .wrapper {
   display: flex;
-  flex-direction: row;
   gap: 20px;
   width: 100%;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
 
   .chartWrapper {
     width: 70%;
@@ -11,5 +13,10 @@
     gap: 12px;
     overflow-y: scroll;
     height: 80vh;
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+      height: auto;
+    }
   }
 }

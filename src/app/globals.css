@@ -14,7 +14,7 @@
     display: none;
   }
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 360px) {
     font-size: 12px;
   }
 }
@@ -23,6 +23,7 @@ html,
 body {
   position: relative;
   min-width: 360px;
+  border: 4px solid red;
   height: auto;
   z-index: 0;
   margin: 0;
@@ -31,12 +32,6 @@ body {
   vertical-align: baseline;
   box-sizing: border-box;
   font-family: "PRETENDARD";
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
 /* Optional: nicer default text rendering */

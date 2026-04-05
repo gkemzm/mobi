@@ -18,13 +18,13 @@ import { useRouter } from "next/navigation";
 import { PLATFORM_OPTIONS, STATUS_OPTIONS } from "./data";
 import { CampaignPlatform, CampaignStatus } from "@/types/marketing";
 
-const GlobalFilter = ({ value, onChange }: GlobalFilterProps) => {
+const GlobalFilter = ({ value, onChange, onClose }: GlobalFilterProps) => {
   const router = useRouter();
   const initialValue = useMemo(() => getInitialGlobalFilter(), []);
   const [internalFilter, setInternalFilter] =
     useState<GlobalFilterState>(initialValue);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-
+  const [monthsToShow, setMonthsToShow] = useState(2);
   const filter = value ?? internalFilter;
   const filterRef = useRef<HTMLDivElement | null>(null);
 
@@ -115,6 +115,17 @@ const GlobalFilter = ({ value, onChange }: GlobalFilterProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    const checkScreen = () => {
+      setMonthsToShow(window.innerWidth <= 768 ? 1 : 2);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
   return (
     <div className={classes.filter} ref={filterRef}>
       <div className={classes.group}>
@@ -138,17 +149,25 @@ const GlobalFilter = ({ value, onChange }: GlobalFilterProps) => {
               <span>{formatDisplayDate(filter.period.to)}</span>
             </button>
           </div>
+
           {isCalendarOpen && (
-            <div className={classes.calendarLayer}>
-              <DayPicker
-                mode="range"
-                locale={ko}
-                selected={selectedRange}
-                onSelect={handleRangeChange}
-                numberOfMonths={2}
-                pagedNavigation
+            <>
+              <div
+                className={classes.calendarBackdrop}
+                onClick={() => setIsCalendarOpen(false)}
               />
-            </div>
+
+              <div className={classes.calendarLayer}>
+                <DayPicker
+                  mode="range"
+                  locale={ko}
+                  selected={selectedRange}
+                  onSelect={handleRangeChange}
+                  numberOfMonths={monthsToShow}
+                  pagedNavigation
+                />
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -207,6 +226,14 @@ const GlobalFilter = ({ value, onChange }: GlobalFilterProps) => {
         onClick={handleReset}
       >
         초기화
+      </button>
+
+      <button
+        type="button"
+        className={`${classes.resetButton} ${classes.closeButton}`}
+        onClick={onClose}
+      >
+        닫기
       </button>
     </div>
   );

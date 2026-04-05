@@ -1,16 +1,27 @@
 .sidebar {
   width: 240px;
+  min-width: 240px;
+  height: 100dvh;
   padding: 24px 16px;
   background: #c3d7ff;
   color: white;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  z-index: 1200;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .logo {
   font-size: 20px;
   font-weight: bold;
+  color: #222222;
 }
 
 .nav {
@@ -35,4 +46,37 @@
 .active {
   background: #2563eb;
   color: #fff;
+}
+
+.closeButton {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.35);
+  color: #222222;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.16);
+  }
+
+  .open {
+    transform: translateX(0);
+  }
+
+  .closeButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
