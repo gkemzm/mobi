@@ -1,5 +1,4 @@
-export type CampaignStatus = "active" | "paused" | "ended";
-export type CampaignPlatform = "Google" | "Meta" | "Naver";
+import { CampaignPlatform, CampaignStatus } from "@/types/marketing";
 
 export interface GlobalFilterProps {
   value?: GlobalFilterState;

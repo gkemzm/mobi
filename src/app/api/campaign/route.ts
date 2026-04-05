@@ -17,7 +17,11 @@ export const GET = async (req: Request) => {
     campaigns = campaigns.filter((c) => c.name !== null);
 
     const filtered = campaigns.filter((c) => {
-      // 1. 집행 기간 겹침 여부
+      const values = Object.values(c);
+      // value 값중 null 체크
+      if (values.includes(null)) return false;
+
+      // 집행 기간 겹침 여부
       if (startDate && endDate) {
         const campaignStart = c.startDate;
         const campaignEnd = c.endDate ?? "9999-12-31";
@@ -27,17 +31,17 @@ export const GET = async (req: Request) => {
         }
       }
 
-      // 2. 상태 필터 (다중 선택)
+      // 상태 필터 (다중 선택)
       if (statuses.length > 0 && !statuses.includes(c.status)) {
         return false;
       }
 
-      // 3. 매체 필터 (다중 선택)
+      // 매체 필터 (다중 선택)
       if (platforms.length > 0 && !platforms.includes(c.platform)) {
         return false;
       }
 
-      // 4. 이름 검색
+      // 이름 검색
       if (name && !c.name.toLowerCase().includes(name)) {
         return false;
       }

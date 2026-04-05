@@ -7,4 +7,9 @@ export const layoutList: LayoutItem[] = [
     id: "daily",
     description: "최대 3개의 차트를 볼 수 있습니다.",
   },
+  {
+    name: "캠페인",
+    id: "campaign",
+    description: "",
+  },
 ];

@@ -27,6 +27,12 @@ const Sidebar = () => {
     } else {
       router.push(`/dashboard/${item.id}`);
     }
+
+    sessionStorage.removeItem("tableSearchPage");
+    sessionStorage.removeItem("tableSearchKeyWord");
+
+    sessionStorage.removeItem("dailyCheck");
+    sessionStorage.removeItem("dailyKeyword");
   };
 
   return (

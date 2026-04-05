@@ -3,12 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { DayPicker, type DateRange } from "react-day-picker";
 import { ko } from "date-fns/locale";
-import type {
-  GlobalFilterState,
-  CampaignPlatform,
-  CampaignStatus,
-  GlobalFilterProps,
-} from "./type";
+import type { GlobalFilterState, GlobalFilterProps } from "./type";
 import {
   formatDateToString,
   formatDisplayDate,
@@ -21,6 +16,7 @@ import classes from "./globalFilter.module.scss";
 import "react-day-picker/dist/style.css";
 import { useRouter } from "next/navigation";
 import { PLATFORM_OPTIONS, STATUS_OPTIONS } from "./data";
+import { CampaignPlatform, CampaignStatus } from "@/types/marketing";
 
 const GlobalFilter = ({ value, onChange }: GlobalFilterProps) => {
   const router = useRouter();
