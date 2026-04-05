@@ -4,9 +4,11 @@ import { ParamsType } from "@/types/common";
 import CampaignTable from "../../common/table/campaignTable";
 import { KeyboardEvent, useEffect, useState } from "react";
 import useCampaignData from "@/hooks/useCampaignData";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { campaignTableListAtom } from "../../../lib/campaign/atom/atom";
 import { TABLE_HEADER_DATA } from "../../common/table/data";
+import { Campaign } from "@/types/marketing";
+import CampaignAddModal from "../../modal/campaignAddModal/campaignAddModal";
 
 interface HomeCompoentType {
   params: ParamsType;
@@ -14,10 +16,15 @@ interface HomeCompoentType {
 
 const CampaignComponent = ({ params }: HomeCompoentType) => {
   /* ATOM */
-  const campaignTableList = useAtomValue(campaignTableListAtom);
+  const [campaignTableList, setCampaignTableList] = useAtom(
+    campaignTableListAtom
+  );
   /* ATOM[E] */
+  // 테이블 페이지네이션 검색
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(1);
+  // 모달 열기
+  const [isOpen, setIsOpen] = useState(false);
 
   const [, getCampaignTableData] = useCampaignData();
 
@@ -50,6 +57,29 @@ const CampaignComponent = ({ params }: HomeCompoentType) => {
     }
   };
 
+  // 캠페인 추가 (휘발성)
+  const handleRegisterCampaign = (campaign: Campaign) => {
+    const newItems = campaignTableList.items.filter(
+      (item, idx) => idx !== campaignTableList.items.length - 1
+    );
+    newItems.unshift({
+      ...campaign,
+      impressions: 0,
+      clicks: 0,
+      conversions: 0,
+      spend: 0,
+      conversionsValue: 0,
+      ctr: 0,
+      cpc: 0,
+      roas: 0,
+    });
+    setCampaignTableList({
+      ...campaignTableList,
+      items: newItems,
+      totalCount: campaignTableList.totalCount + 1,
+    });
+  };
+
   useEffect(() => {
     const page = sessionStorage.getItem("tableSearchPage");
     const word = sessionStorage.getItem("tableSearchKeyWord");
@@ -68,6 +98,11 @@ const CampaignComponent = ({ params }: HomeCompoentType) => {
 
   return (
     <div>
+      <CampaignAddModal
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        onSubmit={handleRegisterCampaign}
+      />
       {campaignTableList && (
         <CampaignTable
           params={params}
@@ -79,7 +114,9 @@ const CampaignComponent = ({ params }: HomeCompoentType) => {
           keyword={keyword}
           onChangeKeyword={setKeyword}
           onKeyDown={onKeyDownKeyword}
-          onClickCreate={() => {}}
+          onClickCreate={() => {
+            setIsOpen(true);
+          }}
           onChangePage={onChangePage}
         />
       )}

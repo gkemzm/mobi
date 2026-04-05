@@ -25,7 +25,9 @@ export const GET = async (req: Request) => {
       const campaignEnd = c.endDate ?? "9999-12-31";
       const values = Object.values(c);
       // value 값중 null 체크
-      if (values.includes(null)) return false;
+      if (values.includes(null)) {
+        return false;
+      }
 
       // 기간 겹침
       if (c.startDate > endDate || campaignEnd < startDate) return false;

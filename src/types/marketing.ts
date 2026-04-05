@@ -3,6 +3,7 @@ import { DailyStat } from "./dailyStat";
 export type CampaignStatus = "active" | "paused" | "ended";
 export type CampaignPlatform = "Google" | "Meta" | "Naver";
 
+// 캠페인 데이터 기본 타입
 export interface Campaign {
   id: string;
   name: string;
@@ -13,6 +14,15 @@ export interface Campaign {
   endDate: string | null;
 }
 
+// 캠페인 테이블 res 타입
+export interface CampaignTableListType {
+  items: CampaignListItem[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
+  totalPages: number;
+}
+// 캠페인 테이블 items 타입
 export interface CampaignListItem {
   id: string;
   name: string;
@@ -33,29 +43,38 @@ export interface CampaignListItem {
   roas: number; // %
 }
 
-export interface CampaignTableListType {
-  items: CampaignListItem[];
-  page: number;
-  pageSize: number;
-  totalCount: number;
-  totalPages: number;
-}
-
 export interface MarketingData {
   campaigns: Campaign[];
   daily_stats: DailyStat[];
 }
 
-// 테이블 리스트 타입
-export interface CampaignTableItem {
+// 캠페인 등록모달 폼타입
+export interface CampaignFormValues {
+  name: string;
+  platform: CampaignPlatform | "";
+  budget: string;
+  spend: string;
+  startDate: string;
+  endDate: string;
+}
+// 캠페인 등록모달 에러처리 타입
+export interface CampaignFormErrors {
+  name?: string;
+  platform?: string;
+  budget?: string;
+  spend?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+// 캠페인 모달 테이터 타입
+export interface CampaignModalType {
   id: string;
   name: string;
-  status: CampaignStatus;
   platform: CampaignPlatform;
+  status: CampaignStatus;
+  budget: number;
   startDate: string;
   endDate: string | null;
   spend: number;
-  ctr: number;
-  cpc: number;
-  roas: number;
 }

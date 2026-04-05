@@ -2,11 +2,7 @@
 
 import { KeyboardEvent, useEffect, useState } from "react";
 import classes from "./campaignTable.module.scss";
-import {
-  CampaignListItem,
-  CampaignStatus,
-  CampaignTableItem,
-} from "@/types/marketing";
+import { CampaignListItem, CampaignStatus } from "@/types/marketing";
 import {
   formatCurrency,
   formatDateRange,
@@ -23,7 +19,7 @@ import { FiChevronDown } from "react-icons/fi";
 interface CampaignTableProps {
   params: ParamsType;
   headers: TableHeaderType[];
-  items: CampaignTableItem[];
+  items: CampaignListItem[];
   totalCount: number;
   currentPage: number;
   totalPages: number;
@@ -54,15 +50,13 @@ const CampaignTable = ({
   const [currentSort, setCurrentSort] = useState("");
   const [currentSortOrder, setCurrentSortOrder] = useState("desc");
   // 상태변경용
-  const [tableItems, setTableItems] = useState<CampaignTableItem[]>([]);
+  const [tableItems, setTableItems] = useState<CampaignListItem[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [bulkStatus, setBulkStatus] = useState<CampaignStatus | "">("");
 
   const isAllChecked =
     tableItems.length > 0 &&
     tableItems.every((item) => selectedIds.includes(item.id));
-
-  const selectedCount = selectedIds.length;
 
   // 정렬 로직
   const onClickSort = (id: string, type: string) => {
@@ -85,6 +79,7 @@ const CampaignTable = ({
       console.error("sorting error");
     }
   };
+
   // 전체 선택
   const handleToggleAll = (checked: boolean) => {
     if (checked) {

@@ -1,0 +1,199 @@
+/* components/campaign-register-modal/CampaignRegisterModal.module.scss */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  width: 100%;
+  max-width: 720px;
+  padding: 28px 32px 30px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.18);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.titleWrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #eaf3ff;
+  color: #3b82f6;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.closeButton {
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.field {
+  flex: 1;
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #d9dee7;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 15px;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
+}
+
+.errorInput {
+  border-color: #ef4444;
+}
+
+.unit {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #9ca3af;
+}
+
+.platformGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.platformButton {
+  flex: 1;
+  height: 52px;
+  border: 1px solid #d9dee7;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 16px;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.platformActive {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.errorText {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #ef4444;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.cancelButton,
+.submitButton {
+  min-width: 84px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cancelButton {
+  border: 1px solid #d9dee7;
+  background: #fff;
+  color: #6b7280;
+}
+
+.submitButton {
+  border: 0;
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    padding: 24px 20px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .platformGroup {
+    flex-direction: column;
+  }
+}
