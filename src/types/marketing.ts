@@ -2,6 +2,7 @@ import { DailyStat } from "./dailyStat";
 
 export type CampaignStatus = "active" | "paused" | "ended";
 export type CampaignPlatform = "Google" | "Meta" | "Naver";
+export type MetricKey = "cost" | "impressions" | "clicks" | "conversions";
 
 // 캠페인 데이터 기본 타입
 export interface Campaign {
@@ -77,4 +78,21 @@ export interface CampaignModalType {
   startDate: string;
   endDate: string | null;
   spend: number;
+}
+
+export interface MarketingData {
+  campaigns: Campaign[];
+  daily_stats: DailyStat[];
+}
+
+export interface PlatformPerformanceItem {
+  platform: CampaignPlatform;
+  value: number;
+  percent: number;
+}
+
+export interface PlatformPerformanceResponse {
+  metric: MetricKey;
+  total: number;
+  items: PlatformPerformanceItem[];
 }
