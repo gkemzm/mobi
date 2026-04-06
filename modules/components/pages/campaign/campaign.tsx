@@ -26,7 +26,7 @@ const CampaignComponent = ({ params }: HomeCompoentType) => {
   // 모달 열기
   const [isOpen, setIsOpen] = useState(false);
 
-  const [, getCampaignTableData] = useCampaignData();
+  const { getCampaignTableData } = useCampaignData();
 
   const onChangePage = (page: number) => {
     getCampaignTableData({

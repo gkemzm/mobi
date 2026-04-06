@@ -3,14 +3,12 @@
 import { ParamsType } from "@/types/common";
 import { Campaign } from "@/types/marketing";
 import { useHydrateAtoms } from "jotai/utils";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { useEffect } from "react";
-import { getCampaigns } from "../../../lib/campaign/campaign";
 
 import CampaignList from "./campaignList/campaignList";
 import LineChart from "./lineChart/lineChart";
 import classes from "./daily.module.scss";
-import useQueryString from "@/hooks/useQuerySting";
 import { campaignsAtom } from "../../../lib/campaign/atom/atom";
 import { dailyStatAtom } from "../../../lib/dailyStat/atom/atom";
 import useCampaignData from "@/hooks/useCampaignData";
@@ -27,7 +25,7 @@ const DailyComponent = ({ params, datas }: DailyCompoentType) => {
   const campaigns = useAtomValue(campaignsAtom);
   const dailyStat = useAtomValue(dailyStatAtom);
   /* ATOM[E] */
-  const [getCampaignData] = useCampaignData();
+  const { getCampaignData } = useCampaignData();
 
   useEffect(() => {
     const name = sessionStorage.getItem("dailyKeyword");

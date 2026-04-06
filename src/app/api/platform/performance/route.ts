@@ -3,12 +3,14 @@ import data from "@/data/db.json";
 import type {
   Campaign,
   MarketingData,
-  MetricKey,
   CampaignPlatform,
-  PlatformPerformanceItem,
-  PlatformPerformanceResponse,
 } from "@/types/marketing";
 import { DailyStat } from "@/types/dailyStat";
+import {
+  MetricKey,
+  PlatformPerformanceItem,
+  PlatformPerformanceResponse,
+} from "@/types/platform";
 
 const AVAILABLE_PLATFORMS: CampaignPlatform[] = ["Google", "Meta", "Naver"];
 const AVAILABLE_METRICS: MetricKey[] = [
@@ -95,7 +97,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
-    console.error("[GET /api/dashboard/platform-performance] error:", error);
+    console.error("[GET performance] error:", error);
 
     return NextResponse.json(
       {

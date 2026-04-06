@@ -56,7 +56,7 @@ const Header = () => {
         <button
           type="button"
           className={classes.menuButton}
-          onClick={() => setIsSidebarOpen(true)}
+          onClick={() => setIsSidebarOpen((prev) => !prev)}
           aria-label="사이드바 열기"
         >
           ☰

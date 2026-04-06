@@ -1,7 +1,7 @@
 import {
   Campaign,
+  CampaignRankingResponse,
   CampaignTableListType,
-  PlatformPerformanceResponse,
 } from "@/types/marketing";
 
 export async function getCampaigns(queryString?: string): Promise<Campaign[]> {
@@ -38,11 +38,15 @@ export async function getCampaignsTableList(
   return response.json();
 }
 
-export async function getPlatformPerformance(
-  queryString?: string
-): Promise<PlatformPerformanceResponse> {
+export async function getCampaignRank({
+  startDate,
+  endDate,
+}: {
+  startDate: string;
+  endDate: string;
+}): Promise<CampaignRankingResponse> {
   const response = await fetch(
-    `http://localhost:3000/api/campaign/performance?${queryString}`,
+    `http://localhost:3000/api/campaign/camPaignRank?startDate=${startDate}&endDate=${endDate}`,
     {
       method: "GET",
       cache: "no-store",
@@ -50,7 +54,7 @@ export async function getPlatformPerformance(
   );
 
   if (!response.ok) {
-    throw new Error("플랫폼별 성과 데이터를 불러오지 못했습니다.");
+    throw new Error("캠페인 상위 랭킹 데이터를 불러오지 못했습니다.");
   }
 
   return response.json();

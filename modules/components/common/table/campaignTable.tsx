@@ -43,7 +43,7 @@ const CampaignTable = ({
   onChangePage,
   onKeyDown,
 }: CampaignTableProps) => {
-  const [, getCampaignTableData] = useCampaignData();
+  const { getCampaignTableData } = useCampaignData();
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   // 정렬용

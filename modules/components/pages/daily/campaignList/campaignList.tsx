@@ -21,7 +21,7 @@ const CampaignList = ({ campaignList, params }: CampaignListType) => {
   const [keyword, setKeyword] = useState<string>("");
   const [checked, setChecked] = useState<string[]>([]);
   const [selected, setSelected] = useState<Campaign[]>([]);
-  const [getCampaignData] = useCampaignData();
+  const { getCampaignData } = useCampaignData();
 
   const onChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);

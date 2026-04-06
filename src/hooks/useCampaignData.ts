@@ -2,14 +2,14 @@ import useQueryString from "@/hooks/useQuerySting";
 import { useSetAtom } from "jotai";
 import { ParamsType } from "@/types/common";
 import {
-  campaignPerformanceAtom,
+  campaignRankAtom,
   campaignsAtom,
   campaignTableListAtom,
 } from "../../modules/lib/campaign/atom/atom";
 import {
+  getCampaignRank,
   getCampaigns,
   getCampaignsTableList,
-  getPlatformPerformance,
 } from "../../modules/lib/campaign/campaign";
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ const useCampaignData = () => {
   /* ATOM */
   const setCampaigns = useSetAtom(campaignsAtom);
   const setCampaignTableList = useSetAtom(campaignTableListAtom);
-  const setCampaignPerformance = useSetAtom(campaignPerformanceAtom);
+  const setCampaignRank = useSetAtom(campaignRankAtom);
   /* ATOM[E] */
   const [isLoading, setIsLoading] = useState(false);
 
@@ -55,22 +55,35 @@ const useCampaignData = () => {
   };
 
   /**
-   * 테이블용 캠페인 데이터 불러오기
+   * 캠페인 상위랭킹 데이터 불러오기
    */
-  const getCampaignPerformance = async (params: ParamsType) => {
+  const getCampaignRankData = async (params: ParamsType) => {
     try {
       setIsLoading(true);
-      const [queryString] = useQueryString(params);
-      const items = await getPlatformPerformance(queryString.toString());
-      setCampaignPerformance(items);
+      const items = await getCampaignRank({
+        startDate:
+          typeof params.searchParams.startDate === "string"
+            ? params.searchParams.startDate
+            : "",
+        endDate:
+          typeof params.searchParams.endDate === "string"
+            ? params.searchParams.endDate
+            : "",
+      });
+      setCampaignRank(items);
     } catch (err) {
-      console.error("getCampaignData");
+      console.error("getCampaignRankData");
     } finally {
       setIsLoading(false);
     }
   };
 
-  return [getCampaignData, getCampaignTableData, getCampaignPerformance];
+  return {
+    getCampaignData,
+    getCampaignTableData,
+    getCampaignRankData,
+    isLoading,
+  };
 };
 
 export default useCampaignData;

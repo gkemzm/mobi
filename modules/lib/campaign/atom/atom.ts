@@ -1,7 +1,7 @@
 import {
   Campaign,
+  CampaignRankingResponse,
   CampaignTableListType,
-  PlatformPerformanceResponse,
 } from "@/types/marketing";
 import { atom } from "jotai";
 
@@ -13,9 +13,8 @@ export const campaignTableListAtom = atom<CampaignTableListType>({
   totalCount: 0,
   totalPages: 1,
 });
-
-export const campaignPerformanceAtom = atom<PlatformPerformanceResponse>({
-  metric: "cost",
-  total: 0,
-  items: [],
+export const campaignRankAtom = atom<CampaignRankingResponse>({
+  roas: [],
+  ctr: [],
+  cpc: [],
 });

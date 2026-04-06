@@ -2,7 +2,7 @@ import { DailyStat } from "./dailyStat";
 
 export type CampaignStatus = "active" | "paused" | "ended";
 export type CampaignPlatform = "Google" | "Meta" | "Naver";
-export type MetricKey = "cost" | "impressions" | "clicks" | "conversions";
+export type CampaingRankingMetricKey = "roas" | "ctr" | "cpc";
 
 // 캠페인 데이터 기본 타입
 export interface Campaign {
@@ -85,14 +85,19 @@ export interface MarketingData {
   daily_stats: DailyStat[];
 }
 
-export interface PlatformPerformanceItem {
+// 랭킹 아이템 타입
+export interface CampaignRankingItem {
+  rank: number;
+  campaignId: string;
+  name: string;
   platform: CampaignPlatform;
   value: number;
-  percent: number;
+  barPercent: number;
 }
 
-export interface PlatformPerformanceResponse {
-  metric: MetricKey;
-  total: number;
-  items: PlatformPerformanceItem[];
+// 랭킹 response 타입
+export interface CampaignRankingResponse {
+  roas: CampaignRankingItem[];
+  ctr: CampaignRankingItem[];
+  cpc: CampaignRankingItem[];
 }

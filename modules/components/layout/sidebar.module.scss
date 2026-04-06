@@ -1,14 +1,14 @@
 .sidebar {
   width: 240px;
   min-width: 240px;
-  height: 100dvh;
+  height: auto;
   padding: 24px 16px;
   background: #c3d7ff;
   color: white;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  z-index: 1200;
+  z-index: 99;
 }
 
 .top {
