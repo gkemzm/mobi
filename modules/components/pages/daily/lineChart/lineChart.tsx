@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Highcharts from "highcharts";
 import { useMemo, useState } from "react";
 import classes from "./lineChart.module.scss";
-import { DailyStatSummary } from "@/types/dailyStat";
+import { DailyStatSummaryType } from "@/types/dailyStat";
 
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
   ssr: false,
@@ -19,7 +19,7 @@ type MetricConfig = {
 };
 
 type CampaignDailyTrendChartProps = {
-  data: DailyStatSummary[];
+  data: DailyStatSummaryType[];
   totalLength: number;
   title: string;
 };

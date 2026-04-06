@@ -1,21 +1,17 @@
 "use client";
 import useCampaignData from "@/hooks/useCampaignData";
 import classes from "./rankChart.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ParamsType } from "@/types/common";
 import { useAtomValue } from "jotai";
 import { campaignRankAtom } from "../../../../lib/campaign/atom/atom";
 import { CAMPAIGN_RANK_FILTER_BTN_DATA } from "./data";
-import { useHydrateAtoms } from "jotai/utils";
-import { CampaignRankingResponse } from "@/types/marketing";
 
 interface RankChartType {
   params: ParamsType;
-  data: CampaignRankingResponse;
 }
-const RankChart = ({ params, data }: RankChartType) => {
-  useHydrateAtoms([[campaignRankAtom, data]]);
-
+const RankChart = ({ params }: RankChartType) => {
+  const { getCampaignRankData } = useCampaignData();
   /* ATOM */
   const campaignRank = useAtomValue(campaignRankAtom);
   /* ATOM[E] */
@@ -26,6 +22,9 @@ const RankChart = ({ params, data }: RankChartType) => {
   const onClickType = (type: "roas" | "ctr" | "cpc") => {
     setType(type);
   };
+  useEffect(() => {
+    getCampaignRankData(params);
+  }, [params]);
   return (
     <section className={classes.card}>
       <div className={classes.header}>

@@ -60,16 +60,8 @@ const useCampaignData = () => {
   const getCampaignRankData = async (params: ParamsType) => {
     try {
       setIsLoading(true);
-      const items = await getCampaignRank({
-        startDate:
-          typeof params.searchParams.startDate === "string"
-            ? params.searchParams.startDate
-            : "",
-        endDate:
-          typeof params.searchParams.endDate === "string"
-            ? params.searchParams.endDate
-            : "",
-      });
+      const [queryString] = useQueryString(params);
+      const items = await getCampaignRank(queryString.toString());
       setCampaignRank(items);
     } catch (err) {
       console.error("getCampaignRankData");

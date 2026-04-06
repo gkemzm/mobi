@@ -1,7 +1,7 @@
-import { DailyStatSummary } from "@/types/dailyStat";
+import { DailyStatSummaryType } from "@/types/dailyStat";
 import { atom } from "jotai";
 export interface DailyStatAtomType {
   name: string;
-  data: DailyStatSummary[];
+  data: DailyStatSummaryType[];
 }
 export const dailyStatAtom = atom<DailyStatAtomType[]>([]);

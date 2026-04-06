@@ -1,6 +1,6 @@
 import { Campaign } from "./marketing";
-
-export interface DailyStat {
+// 기본 일별 추이 타입
+export interface DailyStatType {
   id: string;
   campaignId: string;
   date: string;
@@ -10,8 +10,8 @@ export interface DailyStat {
   cost: number;
   conversionsValue: number | null;
 }
-
-export interface DailyStatSummary {
+// roas ctr cpc를 계산한 타입
+export interface DailyStatSummaryType {
   date: string;
   impressions: number;
   clicks: number;
@@ -23,17 +23,17 @@ export interface DailyStatSummary {
   roas: number;
   campaignData?: Campaign;
 }
-
-export interface DailyStatResponse {
+// 일별 추이 response타입
+export interface DailyStatResponseType {
   name: string;
   success: boolean;
   campaignId: string;
   startDate: string;
   endDate: string;
-  data: DailyStatSummary[];
+  data: DailyStatSummaryType[];
 }
-
-export interface GetDailyStatsParams {
+// 일별 추이 파라미터 타입
+export interface GetDailyStatsParamsType {
   campaignId: string;
   startDate: string;
   endDate: string;

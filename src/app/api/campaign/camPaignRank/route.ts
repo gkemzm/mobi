@@ -7,7 +7,7 @@ import type {
   CampaingRankingMetricKey,
   MarketingData,
 } from "@/types/marketing";
-import { DailyStat } from "@/types/dailyStat";
+import { DailyStatType } from "@/types/dailyStat";
 
 interface CampaignAggregate {
   campaignId: string;
@@ -122,14 +122,39 @@ export async function GET(request: NextRequest) {
 
     const { campaigns, daily_stats } = data as MarketingData;
 
+    // Campaign 필터링
+    const filteredCampaigns = campaigns.filter((c) => {
+      const values = Object.values(c);
+      // value 값중 null 체크
+      if (values.includes(null)) {
+        return false;
+      }
+
+      if (
+        c.status !== "active" &&
+        c.status !== "paused" &&
+        c.status !== "ended"
+      )
+        return false;
+
+      if (
+        c.platform !== "Naver" &&
+        c.platform !== "Google" &&
+        c.platform !== "Meta"
+      )
+        return false;
+
+      return true;
+    });
+
     const campaignMap = new Map<string, Campaign>();
-    campaigns.forEach((campaign) => {
+    filteredCampaigns.forEach((campaign) => {
       campaignMap.set(campaign.id, campaign);
     });
 
     const aggregateMap = new Map<string, CampaignAggregate>();
 
-    daily_stats.forEach((stat: DailyStat) => {
+    daily_stats.forEach((stat: DailyStatType) => {
       if (!isDateInRange(stat.date, startDate, endDate)) return;
       if (!campaignMap.has(stat.campaignId)) return;
 

@@ -5,11 +5,11 @@ import type {
   MarketingData,
   CampaignPlatform,
 } from "@/types/marketing";
-import { DailyStat } from "@/types/dailyStat";
+import { DailyStatType } from "@/types/dailyStat";
 import {
   MetricKey,
-  PlatformPerformanceItem,
-  PlatformPerformanceResponse,
+  PlatformPerformanceItemType,
+  PlatformPerformanceResponseType,
 } from "@/types/platform";
 
 const AVAILABLE_PLATFORMS: CampaignPlatform[] = ["Google", "Meta", "Naver"];
@@ -50,8 +50,29 @@ export async function GET(request: NextRequest) {
 
     const { campaigns, daily_stats } = data as MarketingData;
 
-    const filteredCampaigns: Campaign[] = campaigns;
+    const filteredCampaigns: Campaign[] = campaigns.filter((c) => {
+      const values = Object.values(c);
+      // value 값중 null 체크
+      if (values.includes(null)) {
+        return false;
+      }
 
+      if (
+        c.status !== "active" &&
+        c.status !== "paused" &&
+        c.status !== "ended"
+      )
+        return false;
+
+      if (
+        c.platform !== "Naver" &&
+        c.platform !== "Google" &&
+        c.platform !== "Meta"
+      )
+        return false;
+
+      return true;
+    });
     const campaignPlatformMap = new Map<string, CampaignPlatform>();
     filteredCampaigns.forEach((campaign) => {
       campaignPlatformMap.set(campaign.id, campaign.platform);
@@ -62,7 +83,7 @@ export async function GET(request: NextRequest) {
       platformValueMap.set(platform, 0);
     });
 
-    daily_stats.forEach((stat: DailyStat) => {
+    daily_stats.forEach((stat: DailyStatType) => {
       const platform = campaignPlatformMap.get(stat.campaignId);
 
       if (!platform) return;
@@ -74,7 +95,7 @@ export async function GET(request: NextRequest) {
       platformValueMap.set(platform, nextValue);
     });
 
-    const items: PlatformPerformanceItem[] = AVAILABLE_PLATFORMS.map(
+    const items: PlatformPerformanceItemType[] = AVAILABLE_PLATFORMS.map(
       (platform) => ({
         platform,
         value: platformValueMap.get(platform) ?? 0,
@@ -84,12 +105,15 @@ export async function GET(request: NextRequest) {
 
     const total = items.reduce((acc, item) => acc + item.value, 0);
 
-    const normalizedItems: PlatformPerformanceItem[] = items.map((item) => ({
-      ...item,
-      percent: total > 0 ? Number(((item.value / total) * 100).toFixed(1)) : 0,
-    }));
+    const normalizedItems: PlatformPerformanceItemType[] = items.map(
+      (item) => ({
+        ...item,
+        percent:
+          total > 0 ? Number(((item.value / total) * 100).toFixed(1)) : 0,
+      })
+    );
 
-    const response: PlatformPerformanceResponse = {
+    const response: PlatformPerformanceResponseType = {
       metric,
       total,
       items: normalizedItems,

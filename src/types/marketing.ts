@@ -1,4 +1,4 @@
-import { DailyStat } from "./dailyStat";
+import { DailyStatType } from "./dailyStat";
 
 export type CampaignStatus = "active" | "paused" | "ended";
 export type CampaignPlatform = "Google" | "Meta" | "Naver";
@@ -46,7 +46,7 @@ export interface CampaignListItem {
 
 export interface MarketingData {
   campaigns: Campaign[];
-  daily_stats: DailyStat[];
+  daily_stats: DailyStatType[];
 }
 
 // 캠페인 등록모달 폼타입
@@ -82,7 +82,7 @@ export interface CampaignModalType {
 
 export interface MarketingData {
   campaigns: Campaign[];
-  daily_stats: DailyStat[];
+  daily_stats: DailyStatType[];
 }
 
 // 랭킹 아이템 타입

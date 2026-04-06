@@ -5,7 +5,6 @@ import type {
   Campaign,
   CampaignFormErrors,
   CampaignFormValues,
-  CampaignPlatform,
 } from "@/types/marketing";
 import {
   createCampaignFromForm,
@@ -15,14 +14,13 @@ import {
   validateCampaignForm,
 } from "./util";
 import classes from "./campaignAddModal..module.scss";
+import { PLATFORM_OPTIONS } from "./data";
 
 interface CampaignAddModalProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (campaign: Campaign) => void;
 }
-
-const PLATFORM_OPTIONS: CampaignPlatform[] = ["Google", "Meta", "Naver"];
 
 const CampaignAddModal = ({
   open,

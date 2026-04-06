@@ -21,6 +21,20 @@ export const GET = async (req: Request) => {
       // value 값중 null 체크
       if (values.includes(null)) return false;
 
+      if (
+        c.status !== "active" &&
+        c.status !== "paused" &&
+        c.status !== "ended"
+      )
+        return false;
+
+      if (
+        c.platform !== "Naver" &&
+        c.platform !== "Google" &&
+        c.platform !== "Meta"
+      )
+        return false;
+
       // 집행 기간 겹침 여부
       if (startDate && endDate) {
         const campaignStart = c.startDate;

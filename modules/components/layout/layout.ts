@@ -1,6 +1,6 @@
-import { LayoutItem } from "@/types/layout";
+import { LayoutItemType } from "@/types/layout";
 
-export const layoutList: LayoutItem[] = [
+export const layoutList: LayoutItemType[] = [
   { name: "HOME", id: "home", description: "통계 데이터를 확인하세요" },
   {
     name: "일별 추이",

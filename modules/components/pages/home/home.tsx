@@ -8,22 +8,11 @@ import { getCampaignRank } from "../../../lib/campaign/campaign";
 interface HomeCompoentType {
   params: ParamsType;
 }
-const HomeComponent = async ({ params }: HomeCompoentType) => {
-  const data = await getCampaignRank({
-    startDate:
-      typeof params.searchParams.startDate === "string"
-        ? params.searchParams.startDate
-        : "",
-    endDate:
-      typeof params.searchParams.endDate === "string"
-        ? params.searchParams.endDate
-        : "",
-  });
-
+const HomeComponent = ({ params }: HomeCompoentType) => {
   return (
     <div className={classes.wrapper}>
       <DonutChart params={params} />
-      {data && <RankChart params={params} data={data} />}
+      {<RankChart params={params} />}
     </div>
   );
 };

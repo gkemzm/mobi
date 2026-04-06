@@ -1,11 +1,14 @@
-import { DailyStatResponse, GetDailyStatsParams } from "@/types/dailyStat";
+import {
+  DailyStatResponseType,
+  GetDailyStatsParamsType,
+} from "@/types/dailyStat";
 import { DailyStatAtomType } from "./atom/atom";
 
 export async function getDailyStats({
   campaignId,
   startDate,
   endDate,
-}: GetDailyStatsParams): Promise<DailyStatAtomType> {
+}: GetDailyStatsParamsType): Promise<DailyStatAtomType> {
   const params = new URLSearchParams({
     campaignId,
     startDate,
@@ -24,6 +27,6 @@ export async function getDailyStats({
     throw new Error("일별 성과 데이터를 불러오지 못했습니다.");
   }
 
-  const result: DailyStatResponse = await response.json();
+  const result: DailyStatResponseType = await response.json();
   return { name: result.name, data: result.data };
 }

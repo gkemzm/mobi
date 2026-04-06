@@ -1,11 +1,11 @@
 "use client";
-import { layoutList } from "@/data/layout";
 import classes from "./sidebar.module.scss";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutItem } from "@/types/layout";
+import { LayoutItemType } from "@/types/layout";
 import { useAtom } from "jotai";
 import { isSidebarOpenAtom } from "../../lib/layout/atom/atom";
 import { useEffect } from "react";
+import { layoutList } from "./layout";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -14,7 +14,7 @@ const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useAtom(isSidebarOpenAtom);
   /* ATOM[E] */
 
-  const onClickList = (item: LayoutItem) => {
+  const onClickList = (item: LayoutItemType) => {
     const globalValue = sessionStorage.getItem("globalFilterValue");
     if (globalValue && typeof globalValue === "string") {
       try {

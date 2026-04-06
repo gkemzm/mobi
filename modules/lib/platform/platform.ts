@@ -1,8 +1,8 @@
-import { PlatformPerformanceResponse } from "@/types/platform";
+import { PlatformPerformanceResponseType } from "@/types/platform";
 
 export async function getPlatformPerformanceData(
   queryString?: string
-): Promise<PlatformPerformanceResponse> {
+): Promise<PlatformPerformanceResponseType> {
   const response = await fetch(
     `http://localhost:3000/api/platform/performance?${queryString}`,
     {

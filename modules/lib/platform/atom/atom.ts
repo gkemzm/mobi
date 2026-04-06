@@ -1,7 +1,7 @@
-import { PlatformPerformanceResponse } from "@/types/platform";
+import { PlatformPerformanceResponseType } from "@/types/platform";
 import { atom } from "jotai";
 
-export const platformPerformanceAtom = atom<PlatformPerformanceResponse>({
+export const platformPerformanceAtom = atom<PlatformPerformanceResponseType>({
   metric: "cost",
   total: 0,
   items: [],

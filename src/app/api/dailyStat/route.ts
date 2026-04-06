@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import data from "@/data/db.json";
 import type { MarketingData } from "@/types/marketing";
-import { DailyStat, DailyStatSummary } from "@/types/dailyStat";
+import { DailyStatType, DailyStatSummaryType } from "@/types/dailyStat";
 
 function normalizeNumber(value: number | string | null | undefined): number {
   if (value === null || value === undefined) return 0;
@@ -86,7 +86,7 @@ export async function GET(request: NextRequest) {
 
     const { daily_stats } = data as MarketingData;
 
-    const filteredStats = daily_stats.filter((item: DailyStat) => {
+    const filteredStats = daily_stats.filter((item: DailyStatType) => {
       const itemDate = normalizeDate(item.date);
 
       if (!itemDate) return false;
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
     });
 
     const groupedByDate = filteredStats.reduce<
-      Record<string, DailyStatSummary>
+      Record<string, DailyStatSummaryType>
     >((acc, item) => {
       const date = normalizeDate(item.date);
 
@@ -127,7 +127,7 @@ export async function GET(request: NextRequest) {
       return acc;
     }, {});
 
-    const result: DailyStatSummary[] = Object.values(groupedByDate)
+    const result: DailyStatSummaryType[] = Object.values(groupedByDate)
       .map((item) => ({
         ...item,
         campaignData: campaignData[0],

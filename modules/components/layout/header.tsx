@@ -1,11 +1,11 @@
 "use client";
 import { usePathname } from "next/navigation";
 import classes from "./header.module.scss";
-import { layoutList } from "@/data/layout";
 import GlobalFilter from "../common/globalFilter/globalFilter";
 import { useEffect, useRef, useState } from "react";
 import { useAtom } from "jotai";
 import { isSidebarOpenAtom } from "../../lib/layout/atom/atom";
+import { layoutList } from "./layout";
 
 const Header = () => {
   const pathName = usePathname();

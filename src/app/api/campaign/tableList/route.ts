@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import data from "@/data/db.json";
 import type { MarketingData } from "@/types/marketing";
-import { DailyStat } from "@/types/dailyStat";
+import { DailyStatType } from "@/types/dailyStat";
 
 export const GET = async (req: Request) => {
   try {
@@ -29,6 +29,20 @@ export const GET = async (req: Request) => {
         return false;
       }
 
+      if (
+        c.status !== "active" &&
+        c.status !== "paused" &&
+        c.status !== "ended"
+      )
+        return false;
+
+      if (
+        c.platform !== "Naver" &&
+        c.platform !== "Google" &&
+        c.platform !== "Meta"
+      )
+        return false;
+
       // 기간 겹침
       if (c.startDate > endDate || campaignEnd < startDate) return false;
 
@@ -50,7 +64,7 @@ export const GET = async (req: Request) => {
     });
 
     // campaignId 기준 집계
-    const statsMap = new Map<string, DailyStat[]>();
+    const statsMap = new Map<string, DailyStatType[]>();
 
     filteredStats.forEach((stat) => {
       if (!statsMap.has(stat.campaignId)) {

@@ -38,15 +38,11 @@ export async function getCampaignsTableList(
   return response.json();
 }
 
-export async function getCampaignRank({
-  startDate,
-  endDate,
-}: {
-  startDate: string;
-  endDate: string;
-}): Promise<CampaignRankingResponse> {
+export async function getCampaignRank(
+  queryString?: string
+): Promise<CampaignRankingResponse> {
   const response = await fetch(
-    `http://localhost:3000/api/campaign/camPaignRank?startDate=${startDate}&endDate=${endDate}`,
+    `http://localhost:3000/api/campaign/camPaignRank?${queryString}`,
     {
       method: "GET",
       cache: "no-store",
