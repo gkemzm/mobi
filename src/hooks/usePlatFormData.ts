@@ -3,8 +3,8 @@ import { useSetAtom } from "jotai";
 import { ParamsType } from "@/types/common";
 
 import { useState } from "react";
-import { getPlatformPerformanceData } from "../../modules/lib/platform/platform";
-import { platformPerformanceAtom } from "../../modules/lib/platform/atom/atom";
+import { getPlatformPerformanceData } from "@/modules/lib/platform/platform";
+import { platformPerformanceAtom } from "@/modules/lib/platform/atom/atom";
 
 const usePlatformData = () => {
   /* ATOM */

@@ -5,12 +5,12 @@ import {
   campaignRankAtom,
   campaignsAtom,
   campaignTableListAtom,
-} from "../../modules/lib/campaign/atom/atom";
+} from "@/modules/lib/campaign/atom/atom";
 import {
   getCampaignRank,
   getCampaigns,
   getCampaignsTableList,
-} from "../../modules/lib/campaign/campaign";
+} from "@/modules/lib/campaign/campaign";
 import { useState } from "react";
 
 const useCampaignData = () => {
