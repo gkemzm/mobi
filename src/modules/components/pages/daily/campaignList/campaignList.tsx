@@ -11,9 +11,14 @@ import useCampaignData from "@/hooks/useCampaignData";
 interface CampaignListType {
   campaignList: Campaign[];
   params: ParamsType;
+  sessionKey: string;
 }
 
-const CampaignList = ({ campaignList, params }: CampaignListType) => {
+const CampaignList = ({
+  campaignList,
+  params,
+  sessionKey,
+}: CampaignListType) => {
   const { from, to } = getMonthRange();
   /* ATOM */
   const setDailyStat = useSetAtom(dailyStatAtom);
@@ -52,9 +57,14 @@ const CampaignList = ({ campaignList, params }: CampaignListType) => {
 
       const objFilter = selected.filter((s) => s.id !== id);
       setSelected(objFilter);
+      sessionStorage.setItem(sessionKey, JSON.stringify(objFilter));
     } else {
       setChecked([...checked, id]);
       setSelected([...selected, campaign]);
+      sessionStorage.setItem(
+        sessionKey,
+        JSON.stringify([...selected, campaign])
+      );
       sessionStorage.setItem("dailyCheck", JSON.stringify([...checked, id]));
     }
   };
@@ -114,6 +124,16 @@ const CampaignList = ({ campaignList, params }: CampaignListType) => {
 
     getDailyStatData();
   }, [checked, params]);
+
+  useEffect(() => {
+    const prevSelected = sessionStorage.getItem(sessionKey);
+    if (!prevSelected || typeof prevSelected !== "string") return;
+    try {
+      const parseData = JSON.parse(prevSelected);
+
+      setSelected(parseData);
+    } catch (err) {}
+  }, []);
 
   return (
     <main className={classes.container}>

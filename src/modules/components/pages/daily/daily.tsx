@@ -41,7 +41,11 @@ const DailyComponent = ({ params, datas }: DailyCompoentType) => {
 
   return (
     <div className={classes.wrapper}>
-      <CampaignList campaignList={campaigns} params={params} />
+      <CampaignList
+        campaignList={campaigns}
+        params={params}
+        sessionKey="daily_checked"
+      />
       <div className={classes.chartWrapper}>
         {dailyStat.map((data, idx) => (
           <LineChart

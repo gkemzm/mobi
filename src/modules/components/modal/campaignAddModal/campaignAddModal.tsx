@@ -15,6 +15,7 @@ import {
 } from "./util";
 import classes from "./campaignAddModal..module.scss";
 import { PLATFORM_OPTIONS } from "./data";
+import CommonModal from "../commonModal/commonModal";
 
 interface CampaignAddModalProps {
   open: boolean;
@@ -70,155 +71,13 @@ const CampaignAddModal = ({
   };
 
   return (
-    <div className={classes.overlay}>
-      <div className={classes.modal}>
-        <div className={classes.header}>
-          <div className={classes.titleWrap}>
-            <div className={classes.iconBox}>＋</div>
-            <h2 className={classes.title}>캠페인 등록</h2>
-          </div>
-
-          <button
-            type="button"
-            className={classes.closeButton}
-            onClick={onClose}
-          >
-            ×
-          </button>
-        </div>
-
-        <div className={classes.body}>
-          <div className={classes.field}>
-            <label className={classes.label}>
-              캠페인명 <span className={classes.required}>*</span>
-            </label>
-            <input
-              type="text"
-              className={`${classes.input} ${
-                errors.name ? classes.errorInput : ""
-              }`}
-              placeholder="캠페인명을 입력하세요"
-              value={form.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-            />
-            {errors.name && <p className={classes.errorText}>{errors.name}</p>}
-          </div>
-
-          <div className={classes.field}>
-            <label className={classes.label}>
-              광고 매체 <span className={classes.required}>*</span>
-            </label>
-            <div className={classes.platformGroup}>
-              {PLATFORM_OPTIONS.map((platform) => (
-                <button
-                  key={platform}
-                  type="button"
-                  className={`${classes.platformButton} ${
-                    form.platform === platform ? classes.platformActive : ""
-                  }`}
-                  onClick={() => handleChange("platform", platform)}
-                >
-                  {platform}
-                </button>
-              ))}
-            </div>
-            {errors.platform && (
-              <p className={classes.errorText}>{errors.platform}</p>
-            )}
-          </div>
-
-          <div className={classes.row}>
-            <div className={classes.field}>
-              <label className={classes.label}>
-                예산 <span className={classes.required}>*</span>
-              </label>
-
-              <div className={classes.inputWrap}>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  className={`${classes.input} ${
-                    errors.budget ? classes.errorInput : ""
-                  }`}
-                  placeholder="0"
-                  value={formatNumberWithComma(form.budget)}
-                  onChange={(e) =>
-                    handleChange("budget", removeNonNumeric(e.target.value))
-                  }
-                />
-                <span className={classes.unit}>원</span>
-              </div>
-
-              {errors.budget && (
-                <p className={classes.errorText}>{errors.budget}</p>
-              )}
-            </div>
-
-            <div className={classes.field}>
-              <label className={classes.label}>
-                집행금액 <span className={classes.required}>*</span>
-              </label>
-
-              <div className={classes.inputWrap}>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  className={`${classes.input} ${
-                    errors.spend ? classes.errorInput : ""
-                  }`}
-                  placeholder="0"
-                  value={formatNumberWithComma(form.spend)}
-                  onChange={(e) =>
-                    handleChange("spend", removeNonNumeric(e.target.value))
-                  }
-                />
-                <span className={classes.unit}>원</span>
-              </div>
-
-              {errors.spend && (
-                <p className={classes.errorText}>{errors.spend}</p>
-              )}
-            </div>
-          </div>
-
-          <div className={classes.row}>
-            <div className={classes.field}>
-              <label className={classes.label}>
-                집행 시작일 <span className={classes.required}>*</span>
-              </label>
-              <input
-                type="date"
-                className={`${classes.input} ${
-                  errors.startDate ? classes.errorInput : ""
-                }`}
-                value={form.startDate}
-                onChange={(e) => handleChange("startDate", e.target.value)}
-              />
-              {errors.startDate && (
-                <p className={classes.errorText}>{errors.startDate}</p>
-              )}
-            </div>
-
-            <div className={classes.field}>
-              <label className={classes.label}>
-                집행 종료일 <span className={classes.required}>*</span>
-              </label>
-              <input
-                type="date"
-                className={`${classes.input} ${
-                  errors.endDate ? classes.errorInput : ""
-                }`}
-                value={form.endDate}
-                onChange={(e) => handleChange("endDate", e.target.value)}
-              />
-              {errors.endDate && (
-                <p className={classes.errorText}>{errors.endDate}</p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className={classes.footer}>
+    <CommonModal
+      open={open}
+      onClose={onClose}
+      title="캠페인 등록"
+      icon="＋"
+      footer={
+        <div className={classes.footerWrapper}>
           <button
             type="button"
             className={classes.cancelButton}
@@ -234,8 +93,135 @@ const CampaignAddModal = ({
             등록
           </button>
         </div>
+      }
+    >
+      <div className={classes.field}>
+        <label className={classes.label}>
+          캠페인명 <span className={classes.required}>*</span>
+        </label>
+        <input
+          type="text"
+          className={`${classes.input} ${
+            errors.name ? classes.errorInput : ""
+          }`}
+          placeholder="캠페인명을 입력하세요"
+          value={form.name}
+          onChange={(e) => handleChange("name", e.target.value)}
+        />
+        {errors.name && <p className={classes.errorText}>{errors.name}</p>}
       </div>
-    </div>
+
+      <div className={classes.field}>
+        <label className={classes.label}>
+          광고 매체 <span className={classes.required}>*</span>
+        </label>
+        <div className={classes.platformGroup}>
+          {PLATFORM_OPTIONS.map((platform) => (
+            <button
+              key={platform}
+              type="button"
+              className={`${classes.platformButton} ${
+                form.platform === platform ? classes.platformActive : ""
+              }`}
+              onClick={() => handleChange("platform", platform)}
+            >
+              {platform}
+            </button>
+          ))}
+        </div>
+        {errors.platform && (
+          <p className={classes.errorText}>{errors.platform}</p>
+        )}
+      </div>
+
+      <div className={classes.row}>
+        <div className={classes.field}>
+          <label className={classes.label}>
+            예산 <span className={classes.required}>*</span>
+          </label>
+
+          <div className={classes.inputWrap}>
+            <input
+              type="text"
+              inputMode="numeric"
+              className={`${classes.input} ${
+                errors.budget ? classes.errorInput : ""
+              }`}
+              placeholder="0"
+              value={formatNumberWithComma(form.budget)}
+              onChange={(e) =>
+                handleChange("budget", removeNonNumeric(e.target.value))
+              }
+            />
+            <span className={classes.unit}>원</span>
+          </div>
+
+          {errors.budget && (
+            <p className={classes.errorText}>{errors.budget}</p>
+          )}
+        </div>
+
+        <div className={classes.field}>
+          <label className={classes.label}>
+            집행금액 <span className={classes.required}>*</span>
+          </label>
+
+          <div className={classes.inputWrap}>
+            <input
+              type="text"
+              inputMode="numeric"
+              className={`${classes.input} ${
+                errors.spend ? classes.errorInput : ""
+              }`}
+              placeholder="0"
+              value={formatNumberWithComma(form.spend)}
+              onChange={(e) =>
+                handleChange("spend", removeNonNumeric(e.target.value))
+              }
+            />
+            <span className={classes.unit}>원</span>
+          </div>
+
+          {errors.spend && <p className={classes.errorText}>{errors.spend}</p>}
+        </div>
+      </div>
+
+      <div className={classes.row}>
+        <div className={classes.field}>
+          <label className={classes.label}>
+            집행 시작일 <span className={classes.required}>*</span>
+          </label>
+          <input
+            type="date"
+            className={`${classes.input} ${
+              errors.startDate ? classes.errorInput : ""
+            }`}
+            value={form.startDate}
+            onChange={(e) => handleChange("startDate", e.target.value)}
+          />
+          {errors.startDate && (
+            <p className={classes.errorText}>{errors.startDate}</p>
+          )}
+        </div>
+
+        <div className={classes.field}>
+          <label className={classes.label}>
+            집행 종료일 <span className={classes.required}>*</span>
+          </label>
+          <input
+            type="date"
+            className={`${classes.input} ${
+              errors.endDate ? classes.errorInput : ""
+            }`}
+            value={form.endDate}
+            onChange={(e) => handleChange("endDate", e.target.value)}
+          />
+          {errors.endDate && (
+            <p className={classes.errorText}>{errors.endDate}</p>
+          )}
+        </div>
+      </div>
+    </CommonModal>
   );
 };
 

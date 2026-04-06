@@ -1,14 +1,24 @@
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 240px;
   min-width: 240px;
-  height: auto;
+  height: 100vh;
   padding: 24px 16px;
   background: #c3d7ff;
   color: white;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  z-index: 99;
+  z-index: 1000;
+  overflow-y: auto;
+
+  @media screen and (max-width: 1024px) {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.16);
+  }
 }
 
 .top {
@@ -61,15 +71,6 @@
 }
 
 @media (max-width: 1024px) {
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.16);
-  }
-
   .open {
     transform: translateX(0);
   }
