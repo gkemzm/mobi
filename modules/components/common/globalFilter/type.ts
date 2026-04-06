@@ -1,4 +1,4 @@
-import { CampaignPlatform, CampaignStatus } from "@/types/marketing";
+import { CampaignPlatform, CampaignStatus } from "@/types/campaign";
 
 export interface GlobalFilterProps {
   value?: GlobalFilterState;

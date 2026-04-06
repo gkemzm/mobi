@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import data from "@/data/db.json";
-import type { MarketingData } from "@/types/marketing";
+import type { MarketingData } from "@/types/campaign";
 import { DailyStatType, DailyStatSummaryType } from "@/types/dailyStat";
 
 function normalizeNumber(value: number | string | null | undefined): number {

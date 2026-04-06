@@ -1,4 +1,4 @@
-import { CampaignPlatform, CampaignStatus } from "@/types/marketing";
+import { CampaignPlatform, CampaignStatus } from "@/types/campaign";
 
 export const STATUS_OPTIONS: { label: string; value: CampaignStatus }[] = [
   { label: "진행중", value: "active" },

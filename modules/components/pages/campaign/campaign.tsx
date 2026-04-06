@@ -7,7 +7,7 @@ import useCampaignData from "@/hooks/useCampaignData";
 import { useAtom, useAtomValue } from "jotai";
 import { campaignTableListAtom } from "../../../lib/campaign/atom/atom";
 import { TABLE_HEADER_DATA } from "../../common/table/data";
-import { Campaign } from "@/types/marketing";
+import { Campaign } from "@/types/campaign";
 import CampaignAddModal from "../../modal/campaignAddModal/campaignAddModal";
 
 interface HomeCompoentType {

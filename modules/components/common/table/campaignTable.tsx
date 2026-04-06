@@ -2,7 +2,7 @@
 
 import { KeyboardEvent, useEffect, useState } from "react";
 import classes from "./campaignTable.module.scss";
-import { CampaignListItem, CampaignStatus } from "@/types/marketing";
+import { CampaignListItem, CampaignStatus } from "@/types/campaign";
 import {
   formatCurrency,
   formatDateRange,

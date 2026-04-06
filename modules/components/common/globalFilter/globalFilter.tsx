@@ -16,7 +16,7 @@ import classes from "./globalFilter.module.scss";
 import "react-day-picker/dist/style.css";
 import { useRouter } from "next/navigation";
 import { PLATFORM_OPTIONS, STATUS_OPTIONS } from "./data";
-import { CampaignPlatform, CampaignStatus } from "@/types/marketing";
+import { CampaignPlatform, CampaignStatus } from "@/types/campaign";
 
 const GlobalFilter = ({ value, onChange, onClose }: GlobalFilterProps) => {
   const router = useRouter();

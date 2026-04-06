@@ -1,7 +1,7 @@
 "use client";
 
 import { ParamsType } from "@/types/common";
-import { Campaign } from "@/types/marketing";
+import { Campaign } from "@/types/campaign";
 import { useHydrateAtoms } from "jotai/utils";
 import { useAtomValue } from "jotai";
 import { useEffect } from "react";

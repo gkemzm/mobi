@@ -5,7 +5,7 @@ import type {
   Campaign,
   CampaignFormErrors,
   CampaignFormValues,
-} from "@/types/marketing";
+} from "@/types/campaign";
 import {
   createCampaignFromForm,
   formatNumberWithComma,

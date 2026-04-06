@@ -4,7 +4,7 @@ import type {
   CampaignFormErrors,
   CampaignFormValues,
   CampaignModalType,
-} from "@/types/marketing";
+} from "@/types/campaign";
 
 const pad = (value: number) => String(value).padStart(2, "0");
 

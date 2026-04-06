@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import data from "@/data/db.json";
-import type { MarketingData } from "@/types/marketing";
+import type { MarketingData } from "@/types/campaign";
 import { DailyStatType } from "@/types/dailyStat";
 
 export const GET = async (req: Request) => {

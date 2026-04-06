@@ -1,4 +1,4 @@
-import { Campaign } from "./marketing";
+import { Campaign } from "./campaign";
 // 기본 일별 추이 타입
 export interface DailyStatType {
   id: string;

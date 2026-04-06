@@ -1,4 +1,4 @@
-import { Campaign } from "@/types/marketing";
+import { Campaign } from "@/types/campaign";
 import classes from "./campaignList.module.scss";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { ParamsType } from "@/types/common";

@@ -2,7 +2,7 @@ import {
   Campaign,
   CampaignRankingResponse,
   CampaignTableListType,
-} from "@/types/marketing";
+} from "@/types/campaign";
 
 export async function getCampaigns(queryString?: string): Promise<Campaign[]> {
   const response = await fetch(

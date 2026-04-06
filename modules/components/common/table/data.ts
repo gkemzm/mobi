@@ -1,4 +1,4 @@
-import { CampaignStatus } from "@/types/marketing";
+import { CampaignStatus } from "@/types/campaign";
 import classes from "./campaignTable.module.scss";
 import { TableHeaderType } from "./type";
 

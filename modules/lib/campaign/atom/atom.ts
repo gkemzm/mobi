@@ -2,7 +2,7 @@ import {
   Campaign,
   CampaignRankingResponse,
   CampaignTableListType,
-} from "@/types/marketing";
+} from "@/types/campaign";
 import { atom } from "jotai";
 
 export const campaignsAtom = atom<Campaign[]>([]);

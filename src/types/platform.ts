@@ -1,4 +1,4 @@
-import { CampaignPlatform } from "./marketing";
+import { CampaignPlatform } from "./campaign";
 export type MetricKey = "cost" | "impressions" | "clicks" | "conversions";
 
 // 매체별 통계 데이터

@@ -6,7 +6,7 @@ import type {
   CampaignRankingResponse,
   CampaingRankingMetricKey,
   MarketingData,
-} from "@/types/marketing";
+} from "@/types/campaign";
 import { DailyStatType } from "@/types/dailyStat";
 
 interface CampaignAggregate {

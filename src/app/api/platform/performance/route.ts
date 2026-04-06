@@ -4,7 +4,7 @@ import type {
   Campaign,
   MarketingData,
   CampaignPlatform,
-} from "@/types/marketing";
+} from "@/types/campaign";
 import { DailyStatType } from "@/types/dailyStat";
 import {
   MetricKey,
