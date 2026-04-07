@@ -49,7 +49,7 @@ const CommonModal = ({
 
         <div className={classes.body}>{children}</div>
 
-        {footer && <div className={classes.footer}>{footer}</div>}
+        {footer && <div>{footer}</div>}
       </div>
     </div>
   );

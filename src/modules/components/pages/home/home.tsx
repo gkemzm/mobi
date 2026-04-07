@@ -4,7 +4,6 @@ import { ParamsType } from "@/types/common";
 import DonutChart from "./donutChart/donutChart";
 import classes from "./home.module.scss";
 import RankChart from "./rankChart/rankChart";
-import { getCampaignRank } from "../../../lib/campaign/campaign";
 interface HomeCompoentType {
   params: ParamsType;
 }

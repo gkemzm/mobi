@@ -1,0 +1,177 @@
+.container {
+  width: 100%;
+  padding: 12px 24px;
+  border: 1px solid #e9edf3;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2f3441;
+  white-space: nowrap;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid #e9edf3;
+  border-radius: 16px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  thead th {
+    height: 44px;
+    padding: 0 12px;
+    border-bottom: 1px solid #e9edf3;
+    background: #f8fafc;
+    font-size: 13px;
+    font-weight: 600;
+    color: #8a94a6;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    height: 56px;
+    padding: 0 12px;
+    border-bottom: 1px solid #eef2f6;
+    font-size: 14px;
+    color: #4b5563;
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+.sort {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.normal {
+  cursor: default;
+}
+
+.sortArea {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+  position: relative;
+  top: 2px;
+}
+
+.right {
+  text-align: right !important;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.empty {
+  height: 120px !important;
+  text-align: center !important;
+  color: #98a2b3 !important;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.paginationInfo {
+  font-size: 14px;
+  color: #98a2b3;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pageArrow,
+.pageButton {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 14px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.pageArrow:disabled,
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageActive {
+  background: #eaf3ff;
+  color: #3b82f6;
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 8px;
+    overflow-x: hidden;
+    max-width: 96vw;
+    min-width: 340px;
+  }
+
+  .header {
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 12px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+}

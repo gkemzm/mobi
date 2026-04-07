@@ -38,6 +38,7 @@ const Sidebar = () => {
     sessionStorage.removeItem("tableSearchKeyWord");
 
     sessionStorage.removeItem("dailyCheck");
+    sessionStorage.removeItem("daily_checked");
     sessionStorage.removeItem("dailyKeyword");
 
     setIsSidebarOpen(false);

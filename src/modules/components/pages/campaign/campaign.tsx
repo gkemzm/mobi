@@ -1,14 +1,13 @@
 "use client";
 
 import { ParamsType } from "@/types/common";
-import CampaignTable from "../../common/table/campaignTable";
 import { KeyboardEvent, useEffect, useState } from "react";
 import useCampaignData from "@/hooks/useCampaignData";
 import { useAtom, useAtomValue } from "jotai";
 import { campaignTableListAtom } from "../../../lib/campaign/atom/atom";
-import { TABLE_HEADER_DATA } from "../../common/table/data";
 import { Campaign } from "@/types/campaign";
 import CampaignAddModal from "../../modal/campaignAddModal/campaignAddModal";
+import CampaignTable from "../../common/table/camPaignTable/campaignTable";
 
 interface HomeCompoentType {
   params: ParamsType;
@@ -53,6 +52,7 @@ const CampaignComponent = ({ params }: HomeCompoentType) => {
       });
 
       sessionStorage.setItem("tableSearchKeyWord", keyword);
+      sessionStorage.setItem("tableSearchPage", String(1));
       setPage(1);
     }
   };
@@ -106,7 +106,6 @@ const CampaignComponent = ({ params }: HomeCompoentType) => {
       {campaignTableList && (
         <CampaignTable
           params={params}
-          headers={TABLE_HEADER_DATA}
           items={campaignTableList.items}
           totalCount={campaignTableList.totalCount}
           currentPage={page}
