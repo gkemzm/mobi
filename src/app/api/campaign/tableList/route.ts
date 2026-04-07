@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import data from "@/data/db.json";
 import type { MarketingData } from "@/types/campaign";
 import { DailyStatType } from "@/types/dailyStat";
+import { CampaignServerFilter } from "@/utils/server/campaignFilter";
 
 export const GET = async (req: Request) => {
   try {
@@ -20,42 +21,13 @@ export const GET = async (req: Request) => {
 
     const { campaigns, daily_stats } = data as MarketingData;
 
-    // Campaign 필터링
-    const filteredCampaigns = campaigns.filter((c) => {
-      const campaignEnd = c.endDate ?? "9999-12-31";
-      const values = Object.values(c);
-      // value 값중 null 체크
-      if (values.includes(null)) {
-        return false;
-      }
-
-      if (
-        c.status !== "active" &&
-        c.status !== "paused" &&
-        c.status !== "ended"
-      )
-        return false;
-
-      if (
-        c.platform !== "Naver" &&
-        c.platform !== "Google" &&
-        c.platform !== "Meta"
-      )
-        return false;
-
-      // 기간 겹침
-      if (c.startDate > endDate || campaignEnd < startDate) return false;
-
-      // 상태
-      if (statuses.length && !statuses.includes(c.status)) return false;
-
-      // 매체
-      if (platforms.length && !platforms.includes(c.platform)) return false;
-
-      // 이름
-      if (name && !c.name.toLowerCase().includes(name)) return false;
-
-      return true;
+    const { filteredCampaigns } = CampaignServerFilter({
+      campaigns,
+      startDate,
+      endDate,
+      statuses,
+      platforms,
+      name,
     });
 
     // 기간 내 DailyStat만 필터

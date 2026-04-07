@@ -11,7 +11,7 @@ const HomeComponent = ({ params }: HomeCompoentType) => {
   return (
     <div className={classes.wrapper}>
       <DonutChart params={params} />
-      {<RankChart params={params} />}
+      <RankChart params={params} />
     </div>
   );
 };

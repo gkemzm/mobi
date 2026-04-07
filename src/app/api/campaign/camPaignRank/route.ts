@@ -8,6 +8,7 @@ import type {
   MarketingData,
 } from "@/types/campaign";
 import { DailyStatType } from "@/types/dailyStat";
+import { CampaignServerFilter } from "@/utils/server/campaignFilter";
 
 interface CampaignAggregate {
   campaignId: string;
@@ -118,33 +119,18 @@ export async function GET(request: NextRequest) {
 
     const startDate = searchParams.get("startDate") ?? undefined;
     const endDate = searchParams.get("endDate") ?? undefined;
+    const statuses = searchParams.getAll("status");
+    const platforms = searchParams.getAll("platform");
     const limit = Math.max(1, Number(searchParams.get("limit") ?? 3));
 
     const { campaigns, daily_stats } = data as MarketingData;
 
-    // Campaign 필터링
-    const filteredCampaigns = campaigns.filter((c) => {
-      const values = Object.values(c);
-      // value 값중 null 체크
-      if (values.includes(null)) {
-        return false;
-      }
-
-      if (
-        c.status !== "active" &&
-        c.status !== "paused" &&
-        c.status !== "ended"
-      )
-        return false;
-
-      if (
-        c.platform !== "Naver" &&
-        c.platform !== "Google" &&
-        c.platform !== "Meta"
-      )
-        return false;
-
-      return true;
+    const { filteredCampaigns } = CampaignServerFilter({
+      campaigns,
+      startDate,
+      endDate,
+      statuses,
+      platforms,
     });
 
     const campaignMap = new Map<string, Campaign>();

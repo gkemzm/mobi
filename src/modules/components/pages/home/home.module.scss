@@ -3,9 +3,10 @@
   display: flex;
   background-color: #ffffff;
   border-radius: 20px;
-  align-items: center;
+  align-items: stretch;
   gap: 16px;
   padding: 12px;
+  height: 100%;
 
   @media screen and (max-width: 1024px) {
     flex-direction: column;

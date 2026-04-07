@@ -22,8 +22,8 @@ const Sidebar = () => {
         const newObj = {
           startDate: parseData.period.from,
           endDate: parseData.period.to,
-          statuses: parseData.statuses,
-          platforms: parseData.platforms,
+          status: parseData.statuses,
+          platform: parseData.platforms,
         };
         const url = new URLSearchParams(newObj);
         router.push(`/dashboard/${item.id}?${url.toString()}`);

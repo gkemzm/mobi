@@ -11,6 +11,7 @@ import {
   PlatformPerformanceItemType,
   PlatformPerformanceResponseType,
 } from "@/types/platform";
+import { CampaignServerFilter } from "@/utils/server/campaignFilter";
 
 const AVAILABLE_PLATFORMS: CampaignPlatform[] = ["Google", "Meta", "Naver"];
 const AVAILABLE_METRICS: MetricKey[] = [
@@ -47,32 +48,18 @@ export async function GET(request: NextRequest) {
 
     const startDate = searchParams.get("startDate") ?? undefined;
     const endDate = searchParams.get("endDate") ?? undefined;
-
+    const statuses = searchParams.getAll("status");
+    const platforms = searchParams.getAll("platform");
     const { campaigns, daily_stats } = data as MarketingData;
 
-    const filteredCampaigns: Campaign[] = campaigns.filter((c) => {
-      const values = Object.values(c);
-      // value 값중 null 체크
-      if (values.includes(null)) {
-        return false;
-      }
-
-      if (
-        c.status !== "active" &&
-        c.status !== "paused" &&
-        c.status !== "ended"
-      )
-        return false;
-
-      if (
-        c.platform !== "Naver" &&
-        c.platform !== "Google" &&
-        c.platform !== "Meta"
-      )
-        return false;
-
-      return true;
+    const { filteredCampaigns } = CampaignServerFilter({
+      campaigns,
+      startDate,
+      endDate,
+      statuses,
+      platforms,
     });
+
     const campaignPlatformMap = new Map<string, CampaignPlatform>();
     filteredCampaigns.forEach((campaign) => {
       campaignPlatformMap.set(campaign.id, campaign.platform);

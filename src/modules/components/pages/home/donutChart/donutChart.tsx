@@ -69,17 +69,23 @@ const DonutChart = ({ params }: DountChartType) => {
         data: [
           {
             name: "Google",
-            y: 268803425,
+            y: platformPerformance.items.find(
+              (item) => item.platform === "Google"
+            )?.percent,
             color: "#6C8FF5",
           },
           {
             name: "Meta",
-            y: 203786625,
+            y: platformPerformance.items.find(
+              (item) => item.platform === "Meta"
+            )?.percent,
             color: "#C9D4E5",
           },
           {
             name: "Naver",
-            y: 338607502,
+            y: platformPerformance.items.find(
+              (item) => item.platform === "Naver"
+            )?.percent,
             color: "#5BC58C",
           },
         ],

@@ -4,6 +4,7 @@
   border-radius: 24px;
   background-color: #e3ecff;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+  height: 100%;
 }
 
 .header {
@@ -20,6 +21,7 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 1.4;
+  white-space: nowrap;
 }
 
 .tabGroup {
