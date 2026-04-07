@@ -3,12 +3,14 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import classes from "./donutChart.module.scss";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import { ParamsType } from "@/types/common";
 import { FILTER_BTN_DATA } from "./data";
 import usePlatformData from "@/hooks/usePlatFormData";
 import { platformPerformanceAtom } from "../../../../lib/platform/atom/atom";
+import { globalFilterValueAtom } from "@/modules/lib/common/globalFilter/atom/atom";
+import { CampaignPlatform } from "@/types/campaign";
 
 interface DountChartType {
   params: ParamsType;
@@ -16,6 +18,7 @@ interface DountChartType {
 const DonutChart = ({ params }: DountChartType) => {
   /* ATOM */
   const platformPerformance = useAtomValue(platformPerformanceAtom);
+  const [internalFilter, setInternalFilter] = useAtom(globalFilterValueAtom);
   /* ATOM[E] */
   const { getPlatformPerformance } = usePlatformData();
   const [type, setType] = useState("cost");
@@ -37,10 +40,26 @@ const DonutChart = ({ params }: DountChartType) => {
     },
     plotOptions: {
       pie: {
-        innerSize: "65%", // ⭐ 도넛 핵심
+        innerSize: "65%",
         borderWidth: 0,
         dataLabels: {
           enabled: false,
+        },
+        point: {
+          events: {
+            click: function () {
+              const saveValue = {
+                ...internalFilter,
+                platforms: [this.name as CampaignPlatform],
+              };
+              setInternalFilter(saveValue);
+
+              sessionStorage.setItem(
+                "globalFilterValue",
+                JSON.stringify(saveValue)
+              );
+            },
+          },
         },
       },
     },

@@ -3,7 +3,7 @@ import classes from "./sidebar.module.scss";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutItemType } from "@/types/layout";
 import { useAtom } from "jotai";
-import { isSidebarOpenAtom } from "../../lib/layout/atom/atom";
+import { isSidebarOpenAtom } from "../../lib/common/layout/atom/atom";
 import { useEffect } from "react";
 import { layoutList } from "./layout";
 

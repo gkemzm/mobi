@@ -35,6 +35,8 @@ const DailyComponent = ({ params, datas }: DailyCompoentType) => {
         searchParams: { ...params.searchParams, name: name },
       });
     } else {
+      console.log(params, "aaaa");
+
       getCampaignData(params);
     }
   }, [params]);

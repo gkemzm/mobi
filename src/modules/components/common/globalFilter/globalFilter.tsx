@@ -17,12 +17,14 @@ import "react-day-picker/dist/style.css";
 import { useRouter } from "next/navigation";
 import { PLATFORM_OPTIONS, STATUS_OPTIONS } from "./data";
 import { CampaignPlatform, CampaignStatus } from "@/types/campaign";
+import { useAtom } from "jotai";
+import { globalFilterValueAtom } from "@/modules/lib/common/globalFilter/atom/atom";
 
 const GlobalFilter = ({ value, onChange, onClose }: GlobalFilterProps) => {
   const router = useRouter();
   const initialValue = useMemo(() => getInitialGlobalFilter(), []);
-  const [internalFilter, setInternalFilter] =
-    useState<GlobalFilterState>(initialValue);
+  const [internalFilter, setInternalFilter] = useAtom(globalFilterValueAtom);
+
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [monthsToShow, setMonthsToShow] = useState(2);
   const filter = value ?? internalFilter;

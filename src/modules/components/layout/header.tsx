@@ -4,7 +4,7 @@ import classes from "./header.module.scss";
 import GlobalFilter from "../common/globalFilter/globalFilter";
 import { useEffect, useRef, useState } from "react";
 import { useAtom } from "jotai";
-import { isSidebarOpenAtom } from "../../lib/layout/atom/atom";
+import { isSidebarOpenAtom } from "../../lib/common/layout/atom/atom";
 import { layoutList } from "./layout";
 
 const Header = () => {
